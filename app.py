@@ -320,5 +320,4 @@ def getSubjectAndObservation(id: int, topic: str):
         return {"result": json_data}
     except (Exception) as error:
         return {"result": error}
-if __name__ == "__main__":
-    app.run(port=3000, debug=True)
+
