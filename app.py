@@ -1,5 +1,11 @@
 from fastapi import FastAPI
 import mysql.connector
+import os
+import json
+
+with open("db_config.json", "r") as config_file:
+    db_config = json.load(config_file)
+
 from fastapi.encoders import jsonable_encoder
 # from enum import Enum
 from datetime import date
@@ -14,13 +20,21 @@ app = FastAPI()
 #   database  = ""
 # )
 try:
+    mysql_host = os.environ["MYSQL_HOST"] = db_config["mysql_host"]
+    mysql_port = os.environ["MYSQL_PORT"] = str(db_config["mysql_port"])
+    mysql_user = os.environ["MYSQL_USER"] = db_config["mysql_user"]
+    mysql_password = os.environ["MYSQL_PASSWORD"] = db_config["mysql_password"]
+    mysql_db = os.environ["MYSQL_DB"] = db_config["mysql_db"]
+
+# Crear una conexión a MySQL
     mydb = mysql.connector.connect(
-        host="172.17.0.3",
-        port=3306,
-        user="root",
-        password="secret",
-        database="learnmot"
-    )
+    host=mysql_host,
+    port=mysql_port,
+    user=mysql_user,
+    password=mysql_password,
+    database=mysql_db
+)
+
     print("conexion exitosa")
 except mysql.connector.Error as err:
     # Si se produce un error, imprime el mensaje de error
