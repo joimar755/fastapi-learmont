@@ -1,1 +1,1 @@
-web: app.run(port=3000, debug=True)
+web: uvicorn app:app --host 0.0.0.0 --port $PORT
