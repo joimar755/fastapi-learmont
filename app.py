@@ -122,7 +122,7 @@ def insertarusers(newUsers: Users):
         email = newUsers.email
         password = newUsers.password
         insertar = mydb.cursor()
-        insertar.execute("INSERT INTO user (name,last_name,sex,role,email,password)VALUES(%s,%s,%s,%s,%s,%s)",
+        insertar.execute("INSERT INTO users (name,last_name,sex,role,email,password)VALUES(%s,%s,%s,%s,%s,%s)",
                          (name, last_name, sex, role, email, password))
         mydb.commit()
         insertar.close()
@@ -135,7 +135,7 @@ def insertarusers(newUsers: Users):
 def listausers():
     try:
         cursor = mydb.cursor()
-        cursor.execute("SELECT * FROM user")
+        cursor.execute("SELECT * FROM users")
         result = cursor.fetchall()
         payload = []
         content = {}
