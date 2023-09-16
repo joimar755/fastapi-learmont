@@ -16,7 +16,7 @@ app = FastAPI()
 try:
     mydb = mysql.connector.connect(
         host="172.17.0.3",
-        PORT=3306,
+        port=3306,
         user="root",
         password="secret",
         database="learnmot"
