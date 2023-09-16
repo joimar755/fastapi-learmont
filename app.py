@@ -1,5 +1,11 @@
 from fastapi import FastAPI
 import mysql.connector
+import os
+import json
+
+with open("db_config.json", "r") as config_file:
+    db_config = json.load(config_file)
+
 from fastapi.encoders import jsonable_encoder
 # from enum import Enum
 from datetime import date
@@ -28,6 +34,7 @@ try:
     password=mysql_password,
     database=mysql_db
 )
+
     print("conexion exitosa")
 except mysql.connector.Error as err:
     # Si se produce un error, imprime el mensaje de error
@@ -327,4 +334,3 @@ def getSubjectAndObservation(id: int, topic: str):
         return {"result": json_data}
     except (Exception) as error:
         return {"result": error}
-
