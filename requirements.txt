@@ -2,6 +2,5 @@ textblob
 fastapi
 uvicorn
 mysql-connector-python
-mydb
 env\Scripts\activate
 
