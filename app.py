@@ -20,22 +20,18 @@ app = FastAPI()
 #   database  = ""
 # )
 try:
-    mysql_host = os.environ["MYSQL_HOST"] = db_config["mysql_host"]
-    mysql_port = os.environ["MYSQL_PORT"] = str(db_config["mysql_port"])
-    mysql_user = os.environ["MYSQL_USER"] = db_config["mysql_user"]
-    mysql_password = os.environ["MYSQL_PASSWORD"] = db_config["mysql_password"]
-    mysql_db = os.environ["MYSQL_DB"] = db_config["mysql_db"]
+  mydb = {
+   "host": os.environ.get("MYSQL_HOST"),
+   "user": os.environ.get("MYSQL_USER"),
+   "password": os.environ.get("MYSQL_PASSWORD"),
+   "port": os.environ.get("MYSQL_PORT"),
+   "database": os.environ.get("MYSQL_DB"),
+  }
+  print("conexion exitosa")
 
 # Crear una conexión a MySQL
-    mydb = mysql.connector.connect(
-    host=mysql_host,
-    port=mysql_port,
-    user=mysql_user,
-    password=mysql_password,
-    database=mysql_db
-)
+ 
 
-    print("conexion exitosa")
 except mysql.connector.Error as err:
     # Si se produce un error, imprime el mensaje de error
     print(f"Error de conexión a la base de datos: {err}")
