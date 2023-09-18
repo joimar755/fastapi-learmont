@@ -3,4 +3,5 @@ fastapi
 uvicorn
 mysql-connector-python
 mysql.connector
+python-decouple==3.5 
 
