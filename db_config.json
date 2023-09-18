@@ -1,7 +1,7 @@
 {
-    "mysql_host": "containers-us-west-41.railway.app",
-    "mysql_port": 5623,
+    "mysql_host": "containers-us-west-109.railway.app ",
+    "mysql_port": 6336,
     "mysql_user": "root",
-    "mysql_password": "9tIJKeQrzyHJCLl0Yl5Y",
-    "mysql_db": "railway"
+    "mysql_password": "R4TLgZLSSvfyvc10zEYR",
+    "mysql_db": "learnmot"
 }
