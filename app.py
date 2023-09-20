@@ -1,10 +1,11 @@
 from fastapi import FastAPI
+from decouple import config
 import mysql.connector
 import os
 import json
 
-with open("db_config.json", "r") as config_file:
-    db_config = json.load(config_file)
+#with open("db_config.json", "r") as config_file:
+    #db_config = json.load(config_file)
 
 from fastapi.encoders import jsonable_encoder
 # from enum import Enum
@@ -20,22 +21,24 @@ app = FastAPI()
 #   database  = ""
 # )
 try:
-    mysql_host = os.environ["MYSQL_HOST"] = db_config["mysql_host"]
-    mysql_port = os.environ["MYSQL_PORT"] = str(db_config["mysql_port"])
-    mysql_user = os.environ["MYSQL_USER"] = db_config["mysql_user"]
-    mysql_password = os.environ["MYSQL_PASSWORD"] = db_config["mysql_password"]
-    mysql_db = os.environ["MYSQL_DB"] = db_config["mysql_db"]
+   mydb = {
+    "host": config("MYSQL_HOST"),
+    "port": config("MYSQL_PORT", cast=int),
+    "user": config("MYSQL_USER"),
+    "password": config("MYSQL_PASSWORD"),
+    "database": config("MYSQL_DB"),
+} 
 
-# Crear una conexión a MySQL
-    mydb = mysql.connector.connect(
-    host=mysql_host,
-    port=mysql_port,
-    user=mysql_user,
-    password=mysql_password,
-    database=mysql_db
-)
+   print("conexion exitosa")
+   def get_db_connection():
+      return mysql.connector.connect(**mydb)
+   mydb = get_db_connection()
 
-    print("conexion exitosa")
+        # Ejecuta consultas SQL u operaciones con la base de datos aquí
+        # ...
+
+        # Cierra la conexión a la base de datos
+   #smydb.close()
 except mysql.connector.Error as err:
     # Si se produce un error, imprime el mensaje de error
     print(f"Error de conexión a la base de datos: {err}")
