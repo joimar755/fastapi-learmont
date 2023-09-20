@@ -1,3 +1,10 @@
 textblob
 fastapi
 uvicorn
+<<<<<<< HEAD
+=======
+mysql-connector-python
+mysql.connector
+python-decouple==3.5 
+
+>>>>>>> 1a387cadadd5a819b7d0a9e18381da8cafa1729d
