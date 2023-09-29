@@ -4,8 +4,5 @@
     "mysql_user": "root",
     "mysql_password": "secret",
     "mysql_db": "learnmot"
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 1a387cadadd5a819b7d0a9e18381da8cafa1729d
+

@@ -3,6 +3,8 @@ from decouple import config
 import mysql.connector
 import os
 import json
+from fastapi.middleware.cors import CORSMiddleware
+
 
 #with open("db_config.json", "r") as config_file:
     #db_config = json.load(config_file)
@@ -12,8 +14,14 @@ from fastapi.encoders import jsonable_encoder
 from datetime import date
 from pydantic import BaseModel
 
-app = FastAPI()
-
+app = FastAPI() 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # En producción, especifica los dominios permitidos en lugar de "*"
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 # mydb = mysql.connector.connect(
 #   host = "localhost",
 #   user = "root",
@@ -27,7 +35,8 @@ try:
     "user": config("MYSQL_USER"),
     "password": config("MYSQL_PASSWORD"),
     "database": config("MYSQL_DB"),
-} 
+}  
+
 
    print("conexion exitosa")
    def get_db_connection():
@@ -90,7 +99,8 @@ class Subject(BaseModel):
     description: str 
     name: str
     name_code: str
-    description: str
+    description: str 
+    
 
 
 class Module(BaseModel):
@@ -112,11 +122,12 @@ class AcademicLoad(BaseModel):
 
 class Observation(BaseModel):
     Observations: str 
-    Observations: str
+    Observations: str 
+
 
 
 @app.post("/insertarusers")
-def insertarusers(newUsers: Users):
+async def insertarusers(newUsers: Users):
     try:
         name = newUsers.name
         last_name = newUsers.last_name
@@ -125,7 +136,7 @@ def insertarusers(newUsers: Users):
         email = newUsers.email
         password = newUsers.password
         insertar = mydb.cursor()
-        insertar.execute("INSERT INTO users (name,last_name,sex,role,email,password)VALUES(%s,%s,%s,%s,%s,%s)",
+        await  insertar.execute("INSERT INTO users (name,last_name,sex,role,email,password)VALUES(%s,%s,%s,%s,%s,%s)",
                          (name, last_name, sex, role, email, password))
         mydb.commit()
         insertar.close()
