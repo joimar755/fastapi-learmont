@@ -5,5 +5,6 @@ mysql-connector-python
 mysql.connector
 python-decouple==3.5 
 fastapi[fastapi.middleware.cors]
+uvicorn==0.14.0
 
 
