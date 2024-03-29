@@ -348,3 +348,6 @@ def getSubjectAndObservation(id: int, topic: str):
         return {"result": json_data}
     except (Exception) as error:
         return {"result": error}
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
